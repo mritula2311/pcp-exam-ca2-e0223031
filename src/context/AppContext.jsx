@@ -6,7 +6,7 @@ import { fetchAppData } from '../services/api'
 const CREDENTIALS = {
   studentId: 'E0223031',
   password: '521883',
-  set: 'A',
+  set: 'setA',
 }
 
 export const AppContext = createContext(initialState)
