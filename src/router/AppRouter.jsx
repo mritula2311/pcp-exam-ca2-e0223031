@@ -1,6 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Navigation from '../components/Navigation'
-import FilterPage from '../pages/FilterPage'
 import NotFoundPage from '../pages/NotFoundPage'
 import OrderDetailPage from '../pages/OrderDetailPage'
 import OrdersFilterPage from '../pages/OrdersFilterPage'
@@ -21,13 +20,7 @@ const AppRouter = () => (
           <Route path="/orders" element={<OrdersPage />} caseSensitive />
           <Route
             path="/orders/filter"
-            element={
-              <FilterPage
-                title="Filter Orders"
-                collectionKey="orders"
-                itemTestId="order-item"
-              />
-            }
+            element={<OrdersFilterPage />}
             caseSensitive
           />
           <Route

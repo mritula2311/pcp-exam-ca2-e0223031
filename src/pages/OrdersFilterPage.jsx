@@ -16,7 +16,11 @@ const OrdersFilterPage = () => {
   const trimmedQuery = query.trim()
   const filteredOrders = validOrders.filter((order) => {
     const restaurantName = getRestaurantName(order) || ''
-    return trimmedQuery !== '' && restaurantName.includes(trimmedQuery)
+    if (trimmedQuery === '') {
+      return true
+    }
+
+    return restaurantName.toLowerCase().includes(trimmedQuery.toLowerCase())
   })
 
   if (loading) {
@@ -46,9 +50,7 @@ const OrdersFilterPage = () => {
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Type to filter..."
       />
-      {trimmedQuery === '' ? (
-        <p className="status-message">Please enter a restaurant name.</p>
-      ) : filteredOrders.length === 0 ? (
+      {filteredOrders.length === 0 ? (
         <p className="status-message">no results found</p>
       ) : (
         <div className="item-list">

@@ -75,8 +75,8 @@ export const isValidOrder = (order) => {
     return false
   }
 
-  const items = getOrderItems(order)
-  if (items.length === 0) {
+  const orderId = getOrderId(order)
+  if (orderId === null || orderId === undefined || String(orderId).trim() === '') {
     return false
   }
 
@@ -85,6 +85,7 @@ export const isValidOrder = (order) => {
     return false
   }
 
+  const items = getOrderItems(order)
   const hasInvalidItemQty = items.some((item) => {
     const qty = toNumber(item?.quantity ?? item?.qty)
     return qty !== null && qty < 0
@@ -94,7 +95,11 @@ export const isValidOrder = (order) => {
   }
 
   const totalAmount = getOrderTotalAmount(order)
-  return totalAmount !== null && totalAmount >= 0
+  if (totalAmount !== null && totalAmount < 0) {
+    return false
+  }
+
+  return true
 }
 
 export const normalizeOrderSearch = (order) =>
